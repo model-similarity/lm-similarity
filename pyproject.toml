@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "lm-similarity"
+name = "lm-sim"
 dynamic = ["version"]
 authors = [
   { name="Ilze Amanda Auzina", email="ilze.amanda.auzina@outlook.com" },
