@@ -7,6 +7,8 @@ name = "lm-similarity"
 dynamic = ["version"]
 authors = [
   { name="Ilze Amanda Auzina", email="ilze.amanda.auzina@outlook.com" },
+  { name="Shashwat Goel", email="shashwatnow@gmail.com"},
+  { name="Joschka Strüber", email="joschka.strueber@bethgelab.org"},
 ]
 description = "Python package to compute similarity between LMs"
 readme = "README.md"
