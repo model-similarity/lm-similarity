@@ -1,2 +1,4 @@
 /dist
-/lm_similarity.egg-info
+/lm_sim.egg-info
+/lsim/__pycache__
+*.txt
