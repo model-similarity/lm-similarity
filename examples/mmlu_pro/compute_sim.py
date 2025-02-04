@@ -5,7 +5,7 @@ import os
 import numpy as np
 import yaml
 from huggingface_hub import login
-from lmsim.metrics import Goels_k
+from lmsim.metrics import Kappa_p
 
 #define the path to the leaderboard
 EVAL_ROOT = "open-llm-leaderboard/"
@@ -83,18 +83,18 @@ def main(args: argparse.Namespace):
     #assert that the all inputs are the same length
     assert len(sofmax_a) == len(softmax_b) ==  len(gt_a) == len(gt_b), "Inputs are not the same length"
 
-    #compute the Goels k_p
-    kp = Goels_k()
-    similarity = kp.compute_k(sofmax_a, softmax_b, gt_a)
+    #compute the probabilistic kappa_p
+    kappa_p = Kappa_p()
+    similarity = kappa_p.compute_k(sofmax_a, softmax_b, gt_a)
     print("=============RESULTS================")
     print(f"Similarity: {similarity:.2f}")
-    print(f'Observed agreement: {kp.observed:.2f}')
-    print(f'Expected agreement: {kp.expected:.2f}')
+    print(f'Observed agreement: {kappa_p.observed:.2f}')
+    print(f'Expected agreement: {kappa_p.expected:.2f}')
 
 
 if __name__ == "__main__":
     # Parse command line arguments
-    parser = argparse.ArgumentParser(description="Compute probabilistic Goels k between model pair")
+    parser = argparse.ArgumentParser(description="Compute probabilistic $k_p$ between model pair")
     parser.add_argument("--model_a", type=str, default="Qwen/Qwen2.5-72B-Instruct",help="Huggingface model name")
     parser.add_argument("--model_b", type=str, default="meta-llama/Llama-3.3-70B-Instruct",help="Huggingface model name")
     args = parser.parse_args()
@@ -104,6 +104,6 @@ if __name__ == "__main__":
     hf_token = settings["huggingface"]["api_token"]
     login(token=hf_token)
 
-    print(f'Computing Goels $k_p$ between models: {args.model_a} and {args.model_b}')
+    print(f'Computing probabilistic $\kappa_p$ between models: {args.model_a} and {args.model_b}')
 
     main(args)

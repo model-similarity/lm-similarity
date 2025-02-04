@@ -14,13 +14,15 @@ class Metrics:
         """
         kappa = (self.observed - self.expected) / (1 - self.expected)
         return kappa
-    
+     
 
 class EC(Metrics):
     def __init__(self):
         super().__init__()
         """
         Compute Error Consistency
+        Implemented according to the work by Geirhos et al. (2020)
+        https://arxiv.org/abs/2006.16736
         """
         self.acc_a = None
         self.acc_b = None
@@ -61,14 +63,14 @@ class EC(Metrics):
 
     
 
-class Goels_k(Metrics):
+class Kappa_p(Metrics):
     def __init__(self, prob:bool=True):
         super().__init__()
         """
-        Compute Goels $k$
+        Compute  $kappa_p$
         Default: 
-        - prob=True, compute Goels $k_p$ based on softmax probability
-        - prob=False, compute Goels $k$ based on one-hot vector (discrete)
+        - prob=True, compute $kappa_p$ based on softmax probability
+        - prob=False, compute $kappa_p$ based on one-hot vector (discrete)
         """
         self.p_hat_a = None
         self.p_hat_b = None
