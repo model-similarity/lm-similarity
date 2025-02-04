@@ -17,15 +17,26 @@ pip install lm-sim
 ```
 
 ### Example Usage 
-A simple example to compute probabilistic error consistency $k_p$ in the context of MCQs. Input has be to formatted as follows:
-- `prob_a`: list[np.array], containing the softmax output probabilties of model a
-- `prob_b`: list[np.array], containing the softmax output probabilties of model b
+A simple example to compute Goels $k$ in the context of MCQs (default computation is probabilistic Goels $k_p$). Input has be to formatted as follows:
+- `output_a`: list[np.array], containing the softmax output probabilties of model a
+- `output_b`: list[np.array], containing the softmax output probabilties of model b
 - `gt`: list[int], containing the index of the ground truth 
 
 ```
-from lmsim.metrics import K_p
+from lmsim.metrics import Goels_k
 
-calculator = K_p()
-calculator.compute_kp(prob_a, prob_b, gt)
+calculator = Goels_k()
+calculator.compute_k(output_a, output_b, gt)
 
+```
+
+For a discrete computation, when output probabilities are not availble, set the flag `prob=False` and the input must be formatted as one-hot vectors:
+- `output_a`: list[np.array], one-hot vector of model a
+- `output_b`: list[np.array], one-hot vector of model b
+
+```
+from lmsim.metrics import Goels_k
+
+calculator = Goels_k(prob=False)
+calculator.compute_k(output_a, output_b, gt)
 ```
