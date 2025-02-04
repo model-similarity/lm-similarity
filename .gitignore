@@ -1,4 +1,3 @@
 /dist
 /lm_sim.egg-info
-/lsim/__pycache__
-*.txt
+/lmsim/__pycache__

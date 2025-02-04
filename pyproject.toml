@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lm-sim"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
   { name="Ilze Amanda Auzina", email="ilze.amanda.auzina@outlook.com" },
   { name="Shashwat Goel", email="shashwatnow@gmail.com"},
@@ -12,7 +12,7 @@ authors = [
 ]
 description = "Python package to compute similarity between LMs"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
