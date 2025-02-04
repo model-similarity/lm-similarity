@@ -52,7 +52,7 @@ goels_k.compute_k(output_a, output_b, gt)
 ```
 from lmsim.metrics import EC
 
-ec = EC(prob=False)
+ec = EC()
 ec.compute_k(output_a, output_b, gt)
 ```
 Implementation supports both softmax output probabilties or one-hot vector as input.
