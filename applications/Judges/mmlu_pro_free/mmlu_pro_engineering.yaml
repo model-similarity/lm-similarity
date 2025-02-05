@@ -1,0 +1,5 @@
+description: "The following are questions about engineering. Think step by step and then finish your answer with \"the answer is (X)\" where X is the correct, brief answer.\n"
+include: "_default_template_yaml"
+task: "mmlu_pro_free_engineering"
+task_alias: "engineering"
+process_docs: !function utils.process_engineering
