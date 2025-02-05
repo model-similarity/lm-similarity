@@ -7,8 +7,8 @@ class Metrics:
     def __init__(self):
         self.observed= None
         self.expected= None
-        self.acc_a = None
-        self.acc_b = None
+        self.acc_model1 = None
+        self.acc_model2 = None
 
     def kappa(self):
         """
@@ -40,11 +40,11 @@ class EC(Metrics):
         cobs = np.sum(correct_a == correct_b)
       
         self.observed = cobs/len(output_a)
-        self.acc_a = np.sum(correct_a)/len(output_a)
-        self.acc_b = np.sum(correct_b)/len(output_b)
+        self.acc_model1 = np.sum(correct_a)/len(output_a)
+        self.acc_model2 = np.sum(correct_b)/len(output_b)
 
     def compute_cexp(self):
-        cexp = self.acc_a * self.acc_b + (1-self.acc_a)*(1-self.acc_b)
+        cexp = self.acc_model1 * self.acc_model2 + (1-self.acc_model1)*(1-self.acc_model2)
         self.expected = cexp
     
     def compute_k(self, output_a:list[np.array], output_b:list[np.array], gt:list[int])->float:
@@ -101,8 +101,8 @@ class Kappa_p(Metrics):
 
         self.p_hat_a = phat_a/len(output_a)
         self.p_hat_b = phat_b/len(output_b)
-        self.acc_a = acc_a/len(output_a)
-        self.acc_b = acc_b/len(output_b)
+        self.acc_model1 = acc_a/len(output_a)
+        self.acc_model2 = acc_b/len(output_b)
 
     def compute_frac(self, output_a):
         frac = 0
