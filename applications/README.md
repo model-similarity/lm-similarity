@@ -1,6 +1,21 @@
-# Applications 
+# Applications
+<h2 align="center">
+Great Models Think Alike this Undermines AI Oversight <br>
+<span style="font-size: x-small; font-weight: normal;">Goel, Strüber, Auzina, Chandra, Kumaraguru, Kiela, Prabhu, Bethge, and Geiping (2025).</span>
+</h2>
 
-We use $\kappa_p$ to showcase the importance of reporting and correcting for model similarity, especially in the emerging paradigm of AI oversight. For a detailed explanation please read ["Great Models Think Alike this Undermines AI Oversight" (Goel at al., 2025)](http://example.com). As summarised in Fig.1 we explore the following applications:
+<p align="center">
+  <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank">
+    <img src="images/arxiv.png" alt="arXiv" width="20">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://model-similarity.github.io/" target="_blank">
+    <img src="images/model_similarity_logo.jpeg" alt="project" width="30">
+  </a>
+</p>
+
+
+We use $\kappa_p$ to showcase the importance of reporting and correcting for model similarity, especially in the emerging paradigm of AI oversight. As summarised in Fig.1 we explore the following applications:
 
 <p align="center">
   <img src="./images/contributions.png" alt="Our Main Contributions" width="400">
