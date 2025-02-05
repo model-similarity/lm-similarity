@@ -18,3 +18,10 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 license = {text = "MIT"}
+
+[tool.setuptools.packages.find]
+include = ["lmsim*"]
+exclude = [
+    "examples*",
+    "applications*"
+]
