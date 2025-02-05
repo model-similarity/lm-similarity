@@ -7,6 +7,8 @@ class Metrics:
     def __init__(self):
         self.observed= None
         self.expected= None
+        self.acc_a = None
+        self.acc_b = None
 
     def kappa(self):
         """
@@ -24,8 +26,6 @@ class EC(Metrics):
         Implemented according to the work by Geirhos et al. (2020)
         https://arxiv.org/abs/2006.16736
         """
-        self.acc_a = None
-        self.acc_b = None
 
     def compute_cobs(self, output_a, output_b, gt):
         gt = np.array(gt)
@@ -89,16 +89,20 @@ class Kappa_p(Metrics):
         self.observed = cobsp/len(output_a)
 
     def compute_phat(self,output_a, output_b, gt):
-        phat_a = 0
-        phat_b = 0
+        phat_a, phat_b = 0, 0
+        acc_a, acc_b = 0, 0
         for idx, (sample_a, sample_b) in enumerate(zip(output_a, output_b)):
             assert gt[idx] < len(sample_a), "Ground truth index must be in range of the number of option in a sample"
             phat_a += sample_a[gt[idx]]
             phat_b += sample_b[gt[idx]]
+            acc_a += int(np.argmax(sample_a) == gt[idx])
+            acc_b += int(np.argmax(sample_b) == gt[idx])
             
 
         self.p_hat_a = phat_a/len(output_a)
         self.p_hat_b = phat_b/len(output_b)
+        self.acc_a = acc_a/len(output_a)
+        self.acc_b = acc_b/len(output_b)
 
     def compute_frac(self, output_a):
         frac = 0
