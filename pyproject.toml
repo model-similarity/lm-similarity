@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lm-sim"
-version = "0.0.8"
+version = "0.0.9"
 authors = [
   { name="Ilze Amanda Auzina", email="ilze.amanda.auzina@outlook.com" },
   { name="Shashwat Goel", email="shashwatnow@gmail.com"},
@@ -18,6 +18,10 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 license = {text = "MIT"}
+
+[project.urls]
+Homepage = "https://github.com/model-similarity/lm-similarity.git"
+Projectpage = "https://model-similarity.github.io/"
 
 [tool.setuptools.packages.find]
 include = ["lmsim*"]
