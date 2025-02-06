@@ -5,7 +5,7 @@ import os
 import numpy as np
 import yaml
 from huggingface_hub import login
-from lmsim.metrics import Kappa_p
+from lmsim.metrics import CAPA
 
 #define the path to the leaderboard
 EVAL_ROOT = "open-llm-leaderboard/"
@@ -83,13 +83,13 @@ def main(args: argparse.Namespace):
     #assert that the all inputs are the same length
     assert len(sofmax_a) == len(softmax_b) ==  len(gt_a) == len(gt_b), "Inputs are not the same length"
 
-    #compute the probabilistic kappa_p
-    kappa_p = Kappa_p()
-    similarity = kappa_p.compute_k(sofmax_a, softmax_b, gt_a)
+    #compute CAPA
+    capa = CAPA()
+    similarity = capa.compute_k(sofmax_a, softmax_b, gt_a)
     print("=============RESULTS================")
     print(f"Similarity: {similarity:.2f}")
-    print(f'Observed agreement: {kappa_p.observed:.2f}')
-    print(f'Expected agreement: {kappa_p.expected:.2f}')
+    print(f'Observed agreement: {capa.observed:.2f}')
+    print(f'Expected agreement: {capa.expected:.2f}')
 
 
 if __name__ == "__main__":
@@ -104,6 +104,6 @@ if __name__ == "__main__":
     hf_token = settings["huggingface"]["api_token"]
     login(token=hf_token)
 
-    print(f'Computing probabilistic $\kappa_p$ between models: {args.model_a} and {args.model_b}')
+    print(f'Computing CAPA $\kappa_p$ between models: {args.model_a} and {args.model_b}')
 
     main(args)
