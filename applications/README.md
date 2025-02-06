@@ -19,7 +19,7 @@ We investigate the importance of reporting and correcting for model similarity o
 - LM-as-a-Judge
 - LM-as-a-Annotator
 
-For quick overview of the main findings please visit [Project Page](), and for detailed experimental setup and dicussion read [Great Models Think Alike and this Underlines AI Oversight (2025)](link). 
+For quick overview of the main findings please visit [Project Page](https://model-similarity.github.io/), and for detailed experimental setup and dicussion read [Great Models Think Alike and this Underlines AI Oversight (2025)](link). 
 
 
 <!-- We use $\kappa_p$ to showcase the importance of reporting and correcting for model similarity, especially in the emerging paradigm of AI oversight. As summarised in Fig.1 we explore the following applications: -->
