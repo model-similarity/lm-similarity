@@ -18,8 +18,8 @@ pip install lm-sim
 
 ### Example Usage 
 Currently we support the calcualtion of 3 similarity metrics in the context of MCQ datasets: 
-- CAPA (Chance Adjusted Probabilistic Alignment), $\kappa_p$ (default)
-- CAPA (Chance Adjusted Probabilistic Alignment), $\kappa_p$ discrete
+- CAPA (Chance Adjusted Probabilistic Agreement), $\kappa_p$ (default)
+- CAPA (Chance Adjusted Probabilistic Agreement), $\kappa_p$ discrete
 - Error Consistency
 
 #### Compute similarity based on CAPA, $\kappa_p$

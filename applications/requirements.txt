@@ -5,7 +5,7 @@ vllm
 jupyter-server
 pytest
 pingouin
-lmsim==0.1.0
+lmsim==0.1.1
 absl-py==2.1.0
 accelerate==1.1.1
 aiohttp @ file:///croot/aiohttp_1715108769648/work
