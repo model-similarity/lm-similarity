@@ -9,6 +9,8 @@ class Metrics:
         self.expected= None
         self.acc_model1 = None
         self.acc_model2 = None
+        self.epsilon = 1e-6
+
 
     def kappa(self):
         """
@@ -29,8 +31,19 @@ class EC(Metrics):
 
     def compute_cobs(self, output_a, output_b, gt):
         gt = np.array(gt)
-        preds_a = np.array([np.argmax(a) for a in output_a])
-        preds_b = np.array([np.argmax(b) for b in output_b])
+        # preds_a = np.array([np.argmax(a) for a in output_a])
+        # preds_b = np.array([np.argmax(b) for b in output_b])
+
+        preds_a, preds_b = [], []
+        for sample_a, sample_b in zip(output_a, output_b):
+            assert len(sample_a) == len(sample_b), "Model ouput must be equal length"
+            assert len(sample_a) > 1 and len(sample_b), "Model ouput must have more than one option"
+            assert sum(sample_a) >= 1 - self.epsilon and sum(sample_a) <= 1 + self.epsilon, "Model ouput must be softmax probability or one-hot vector"
+            assert sum(sample_b) >= 1 - self.epsilon and sum(sample_b) <= 1 + self.epsilon, "Model ouput must be softmax probability or one-hot vector"
+            preds_a.append(np.argmax(sample_a))
+            preds_b.append(np.argmax(sample_b))
+
+        preds_a, preds_b = np.array(preds_a), np.array(preds_b)
 
         # Compare each prediction with ground-truth
         correct_a = (preds_a == gt)
@@ -63,24 +76,27 @@ class EC(Metrics):
 
     
 
-class Kappa_p(Metrics):
+class CAPA(Metrics):
     def __init__(self, prob:bool=True):
         super().__init__()
         """
-        Compute  $kappa_p$
+        Compute CAPA: Chance Adjusted Probabilistic Alignment, $\kappa_p$
         Default: 
-        - prob=True, compute $kappa_p$ based on softmax probability
-        - prob=False, compute $kappa_p$ based on one-hot vector (discrete)
+        - prob=True, compute $\kappa_p$ based on softmax probability
+        - prob=False, compute $\kappa_p$ based on one-hot vector (discrete)
         """
         self.p_hat_a = None
         self.p_hat_b = None
         self.frac = None
         self.prob = prob
-
+        
     def compute_cobsp(self, output_a, output_b):
         cobsp = 0
         for sample_a, sample_b in zip(output_a, output_b):
             assert len(sample_a) == len(sample_b), "Model ouput must be equal length"
+            assert len(sample_a) > 1 and len(sample_b), "Model ouput must have more than one option"
+            assert sum(sample_a) >= 1 - self.epsilon and sum(sample_a) <= 1 + self.epsilon, "Model ouput must be softmax probability or one-hot vector"
+            assert sum(sample_b) >= 1 - self.epsilon and sum(sample_b) <= 1 + self.epsilon, "Model ouput must be softmax probability or one-hot vector"
             if self.prob:
                 cobsp += np.sum(sample_a * sample_b)
             else:
@@ -116,7 +132,7 @@ class Kappa_p(Metrics):
     
     def compute_k(self, output_a:list[np.array], output_b:list[np.array], gt:list[int])->float:
         """
-        Compute Goels $k$
+        Compute CAPA $\kappa_p$
         input:
         prob_a: list of softmax probabilities (np.array) or one-hot vector (np.array) for model A
         prob_b: list of softmax probabilities (np.array) or one-hot vector (np.array) for model B

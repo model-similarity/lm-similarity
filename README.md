@@ -18,11 +18,11 @@ pip install lm-sim
 
 ### Example Usage 
 Currently we support the calcualtion of 3 similarity metrics in the context of MCQ datasets: 
-- $\kappa_p$ probabilistic (default)
-- $\kappa_p$ discrete
+- CAPA (Chance Adjusted Probabilistic Alignment), $\kappa_p$ (default)
+- CAPA (Chance Adjusted Probabilistic Alignment), $\kappa_p$ discrete
 - Error Consistency
 
-#### Compute similarity based on $\kappa_p$
+#### Compute similarity based on CAPA, $\kappa_p$
 
 Below is a simple example on how to compute similarity between 2 models based on $k_p$. The input has be to formatted as follows:
 - `output_a`: list[np.array], containing the softmax output probabilties of model a
@@ -30,10 +30,10 @@ Below is a simple example on how to compute similarity between 2 models based on
 - `gt`: list[int], containing the index of the ground truth 
 
 ```
-from lmsim.metrics import Kappa_p
+from lmsim.metrics import CAPA
 
-kappa_p= Kappa_p()
-kappa_p.compute_k(output_a, output_b, gt)
+capa= CAPA()
+capa.compute_k(output_a, output_b, gt)
 
 ```
 
@@ -42,10 +42,10 @@ For a discrete computation (when output probabilities are not availble) set the 
 - `output_b`: list[np.array], one-hot vector of model b
 
 ```
-from lmsim.metrics import Kappa_p
+from lmsim.metrics import CAPA
 
-kappa_p = Kappa_p(prob=False)
-kappa_p.compute_k(output_a, output_b, gt)
+capa = CAPA(prob=False)
+capa.compute_k(output_a, output_b, gt)
 ```
 
 #### Compute similarity based on Error Consistency
