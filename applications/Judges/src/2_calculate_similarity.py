@@ -10,7 +10,7 @@ from concurrent.futures import ProcessPoolExecutor
 import datasets
 from huggingface_hub import login
 from utils import load_settings, load_jsonl, softmax
-from lmsim.metrics import Kappa_p, EC
+from lmsim.metrics import CAPA, EC
 
 # Define evalution plarform and benchmark root
 EVAL_ROOT = "open-llm-leaderboard/"
@@ -178,11 +178,10 @@ def calculate_and_save_metrics(
 
     results_dict = {"num_qs":len(softmax_a), "accuracy":""}
     for metric_name in metrics:
-        #compute the probabilistic kappa_p
-        if metric_name == 'kappa_p':
-            metric = Kappa_p()
-        elif metric_name == 'kappa_p_discrete':
-            metric = Kappa_p(prob=False)
+        if metric_name == 'capa':
+            metric = CAPA()
+        elif metric_name == 'capa_discrete':
+            metric = CAPA(prob=False)
         elif metric_name == 'ec':
             metric = EC()
     
@@ -196,7 +195,7 @@ def calculate_and_save_metrics(
                 "oberved": metric.observed,
                 "expected": metric.expected,
                 }
-        if metric_name.find('kappa_p') != -1:
+        if metric_name.find('capa') != -1:
             results_dict[metric_name]["p_hat"] = {model1.name: metric.p_hat_a, model2.name: metric.p_hat_b}
             results_dict[metric_name]["frac"] = metric.frac
 
@@ -268,7 +267,7 @@ def main():
         "--metrics",                                           # Argument name (use it with --items in CLI)
         nargs="+",                                           # "+" means one or more items
         type=str,                                            # Parse each item as a string
-        default=['kappa_p','kappa_p_discrete', 'ec'],              # Optional: if not provided, default to an empty list
+        default=['capa','capa_discrete', 'ec'],              # Optional: if not provided, default to an empty list
         help="List of strings to process."
     )
 

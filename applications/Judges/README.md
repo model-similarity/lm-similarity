@@ -19,9 +19,9 @@ To compute the similarity metrics between judges and evaluated models, you have 
 ```
 python 2_calculate_similarities.py 
 ```
-By default $k_p$, $k_p$ discrete, and error consistency are computed. If you want to compute only one of them pass via:
+By default CAPA $k_p$, CAPA $k_p$ discrete, and error consistency are computed. If you want to compute only one of them pass via:
 ```
-python 2_calculate_similarities.py --metrics kappa_p
+python 2_calculate_similarities.py --metrics capa
 ```
 Computed simlarities will be automatically stored in `../output/sim/` folder.
 
