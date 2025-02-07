@@ -1,6 +1,6 @@
 # Application: LLM-as-a-Judge 
 
-This directory contains the steps to reproduce the experiments of Chapter 3 "Affinity Bias in AI Judges" in [paper](). 
+This directory contains the steps to reproduce the experiments of Chapter 3 "Affinity Bias in AI Judges" in [paper](https://arxiv.org/abs/2502.04313). 
 
 
 The following explanation assumes that the python code is executed from the `src/` directory. 

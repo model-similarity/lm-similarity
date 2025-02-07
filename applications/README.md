@@ -16,7 +16,7 @@ Great Models Think Alike this Undermines AI Oversight <br>
 **Great Models Think Alike and this Undermines AI Oversight**  
 [Shashwat Goel](https://shash42.github.io/), [Joschka Strüber](https://github.com/the-klingspor), [Ilze Amanda Auzina](https://ilzeamandaa.github.io), [Karuna K Chandra](https://www.linkedin.com/in/karuna-k-c-519945214), [Ponnurangam Kumaraguru](https://precog.iiit.ac.in/), [Douwe Kiela](https://douwekiela.github.io), [Ameya Prabhu](https://drimpossible.github.io), [Matthias Bethge](https://bethgelab.org), [Jonas Geiping](https://jonasgeiping.github.io)
 
-[[Paper](https://openreview.net/pdf?id=v8enu4jP9B)] [[Webpage](https://model-similarity.github.io)] [[Interactive Tool](https://huggingface.co/spaces/bethgelab/lm-similarity)] [[Data](https://huggingface.co/datasets/bethgelab/lm-similarity)]
+[[Paper](https://arxiv.org/abs/2502.04313)] [[Webpage](https://model-similarity.github.io)] [[Interactive Tool](https://huggingface.co/spaces/bethgelab/lm-similarity)] [[Data](https://huggingface.co/datasets/bethgelab/lm-similarity)]
 
 <p align="center">
 <a href="url"><img src="https://github.com/model-similarity/lm-similarity/blob/main/applications/main_fig.png" height="300" width="381" ></a>

@@ -1,6 +1,6 @@
 # Application: LM-as-Annotators
 
-This directory contains the steps to reproduce the experiments of Chapter 4 "Learning from Complementary Knowledge of LM Annotators" in [paper](). 
+This directory contains the steps to reproduce the experiments of Chapter 4 "Learning from Complementary Knowledge of LM Annotators" in [paper](https://arxiv.org/abs/2502.04313). 
 
 We use the open-source reproduction of weak-to-strong generalization experiments by [this blog post](https://blog.eleuther.ai/weak-to-strong/), based in part on [openai/weak-to-strong](https://github.com/openai/weak-to-strong).
 
