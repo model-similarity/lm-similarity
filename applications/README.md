@@ -13,13 +13,14 @@ Great Models Think Alike this Undermines AI Oversight <br>
     <img src="images/model_similarity_logo.jpeg" alt="project" width="30">
   </a>
 </p> -->
+**Great Models Think Alike and this Undermines AI Oversight**  
+[Shashwat Goel](https://shash42.github.io/), [Joschka Strüber](https://github.com/the-klingspor), [Ilze Amanda Auzina](https://ilzeamandaa.github.io), [Karuna K Chandra](https://www.linkedin.com/in/karuna-k-c-519945214), [Ponnurangam Kumaraguru](https://precog.iiit.ac.in/), [Douwe Kiela](https://douwekiela.github.io), [Ameya Prabhu](https://drimpossible.github.io), [Matthias Bethge](https://bethgelab.org), [Jonas Geiping](https://jonasgeiping.github.io)
 
-We investigate the importance of reporting and correcting for model similarity on the 3 following applications:
-- Model Capabilties
-- LM-as-a-Judge
-- LM-as-a-Annotator
+[[Paper](https://openreview.net/pdf?id=v8enu4jP9B)] [[Webpage](https://model-similarity.github.io)] [[Interactive Tool](https://huggingface.co/spaces/bethgelab/lm-similarity)] [[Data](https://huggingface.co/datasets/bethgelab/lm-similarity)]
 
-For quick overview of the main findings please visit [Project Page](https://model-similarity.github.io/), and for detailed experimental setup and dicussion read [Great Models Think Alike and this Underlines AI Oversight (2025)](link). 
+<p align="center">
+<a href="url"><img src="https://github.com/model-similarity/lm-similarity/blob/main/applications/main_fig.png" height="300" width="381" ></a>
+</p>
 
 
 <!-- We use $\kappa_p$ to showcase the importance of reporting and correcting for model similarity, especially in the emerging paradigm of AI oversight. As summarised in Fig.1 we explore the following applications: -->
@@ -86,3 +87,19 @@ Install the remaining requirements using pip.
 ```
 pip install -r requirements.txt
 ```
+
+## Citation
+To cite our work:
+
+```
+@misc{goel2025greatmodelsthinkalike,
+      title={Great Models Think Alike and this Undermines AI Oversight}, 
+      author={Shashwat Goel and Joschka Struber and Ilze Amanda Auzina and Karuna K Chandra and Ponnurangam Kumaraguru and Douwe Kiela and Ameya Prabhu and Matthias Bethge and Jonas Geiping},
+      year={2025},
+      eprint={2502.04313},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2502.04313}, 
+}
+```
+
