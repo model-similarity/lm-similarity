@@ -1,6 +1,8 @@
 # LM-Similarity
 
-**lm-sim** is a Python module for computing similarity between Language Models and is distributed under the MIT license. 
+**lm-sim** is a Python module for computing similarity between Language Models and is distributed under the MIT license. <br>
+For a detailed discussion on metrics and applications to AI oversight, see [our paper](https://arxiv.org/abs/2502.04313)
+
 
 ## Installation
 
@@ -56,3 +58,18 @@ ec = EC()
 ec.compute_k(output_a, output_b, gt)
 ```
 Implementation supports both softmax output probabilties or one-hot vector as input.
+
+#### Citation
+To cite our work:
+```
+@misc{goel2025greatmodelsthinkalike,
+      title={Great Models Think Alike and this Undermines AI Oversight}, 
+      author={Shashwat Goel and Joschka Struber and Ilze Amanda Auzina and Karuna K Chandra and Ponnurangam Kumaraguru and Douwe Kiela and Ameya Prabhu and Matthias Bethge and Jonas Geiping},
+      year={2025},
+      eprint={2502.04313},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2502.04313}, 
+}
+```
+
