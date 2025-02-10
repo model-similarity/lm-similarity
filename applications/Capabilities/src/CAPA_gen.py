@@ -12,7 +12,7 @@ from typing import Dict, List, Tuple, Any
 from dataclasses import dataclass
 from concurrent.futures import ProcessPoolExecutor
 import functools
-from lmsim.metrics import Kappa_p
+from lmsim.metrics import CAPA
 
 @dataclass
 class MetricsResult:
@@ -70,9 +70,16 @@ class ModelMetrics:
         return metrics
 
 class MetricsCalculator:
-    def __init__(self, model1: ModelMetrics, model2: ModelMetrics):
+    def __init__(self, model1: ModelMetrics, model2: ModelMetrics, type_m: str):
         self.m1 = model1
         self.m2 = model2
+        
+        if type_m == "prob":
+            self.metric = CAPA()
+        else:
+            self.metric = CAPA(prob=False)
+        
+        self.type_m = type_m
         self._validate_models()
     
     def _validate_models(self):
@@ -83,7 +90,7 @@ class MetricsCalculator:
                 continue
             assert subject in self.m2.subject_metrics
             
-    def calculate_cobs(self, questions1: List[Dict], questions2: List[Dict], type_m: str = "prob") -> Tuple[float, int, float, float, List[int]]:
+    def calculate_cobs(self, questions1: List[Dict], questions2: List[Dict]) -> Tuple[float, int, float, float, List[int]]:
 
         questions1.sort(key=lambda x: x['question_id'])
         questions2.sort(key=lambda x: x['question_id'])
@@ -103,7 +110,7 @@ class MetricsCalculator:
             
             gt = gt.append(correct_idx1)
 
-            if type_m == "prob":
+            if self.type_m == "prob":
 
                 q1_softmax = self.m1.softmax(q1['logits'])
                 q2_softmax = self.m2.softmax(q2['logits'])
@@ -135,12 +142,10 @@ class MetricsCalculator:
                 output_a.append(op_a)
                 output_b.append(op_b)
             
-            CAPA  = Kappa_p(output_a, output_b, gt)
-
-
+        similarity = self.metric.compute_k(output_a, output_b, gt)
         
         # print(same, total, m1_corr, m2_corr, len(op_len))
-        return MetricsResult(score=CAPA)
+        return MetricsResult(score=similarity)
 
     
 def calculate_and_save_metrics(calculator: MetricsCalculator, 
@@ -149,9 +154,7 @@ def calculate_and_save_metrics(calculator: MetricsCalculator,
                              path1: str, 
                              path2: str, 
                              sortby: str, 
-                             diffpath: str, 
-                             dataset: str, 
-                             type_m: str) -> Dict:
+                             diffpath: str) -> Dict:
     """Calculate metrics for model pairs and save results to files"""
     
     # Create output directory
@@ -174,7 +177,7 @@ def calculate_and_save_metrics(calculator: MetricsCalculator,
         
         # Calculate metrics
         kappa_score = calculator.calculate_cobs(
-            m1_questions, m2_questions, type_m)
+            m1_questions, m2_questions)
         
 
         # Store results
@@ -189,9 +192,7 @@ def calculate_and_save_metrics(calculator: MetricsCalculator,
     # Calculate overall metrics
     overall_score = calculator.calculate_cobs(
         overall_questions, 
-        [q for s in model2.subject_metrics if s != 'overall' for q in model2.subject_metrics[s]['questions']], 
-        type_m
-    )
+        [q for s in model2.subject_metrics if s != 'overall' for q in model2.subject_metrics[s]['questions']])
 
     # Add overall results
     subject_results["overall"] = {
@@ -219,19 +220,19 @@ def calculate_and_save_metrics(calculator: MetricsCalculator,
     return subject_results
 
 
-def process_model_pair(args: Tuple[str, str, str, str, str, str]) -> None:
-    path1, path2, sortby, diffpath, dataset, type_m = args
+def process_model_pair(args: Tuple[str, str, str, str, str]) -> None:
+    path1, path2, sortby, diffpath, type_m = args
     
     if os.path.isdir(path1) or os.path.isdir(path2):
         return
         
     model1 = ModelMetrics(path1)
     model2 = ModelMetrics(path2)
-    calculator = MetricsCalculator(model1, model2)
+    calculator = MetricsCalculator(model1, model2, type_m)
         
         # Calculate metrics and save results
     results = calculate_and_save_metrics(calculator, model1, model2, path1, path2, 
-                                          sortby, diffpath, dataset, type_m)
+                                          sortby, diffpath)
         
     return results
 
@@ -264,11 +265,10 @@ def main():
             for j in range(i, len(sub_dirs_list)):
                 path1 = f"{dirs}/{sub_dirs_list[i]}"
                 path2 = f"{dirs}/{sub_dirs_list[j]}"
-                dataset = 'MCQ'
                 diffpath = f'{dirs}/diffs'
                 sortby = f'kappa_{args.type}'
                 
-                process_args.append((path1, path2, sortby, diffpath, dataset, args.type))
+                process_args.append((path1, path2, sortby, diffpath, args.type))
         
         print(len(process_args))
         # Create the diffs directory if it doesn't exist
